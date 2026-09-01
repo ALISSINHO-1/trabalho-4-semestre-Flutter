@@ -1,9 +1,15 @@
 # Trabalho do 1º Bimestre — Programação para Dispositivos Móveis
 
 ## Integrantes
-
-* Nome:
-* Nome:
+_______________________________________
+* Nome: Alisson Rodrigues Biava Filho
+*RA: 264165-2024
+_______________________________________
+* Nome: Guilherme Cortez Lopes
+* RA: 296699-2025
+_______________________________________
+* Nome: Luis Felipe
+*RA: 
 
 ## Domínio
 
