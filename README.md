@@ -8,8 +8,8 @@ _______________________________________
 * Nome: Guilherme Cortez Lopes
 * RA: 296699-2025
 _______________________________________
-* Nome: Luis Felipe
-*RA: 
+* Nome: Luis Felipe Valente Santini
+*RA: 286050-2025
 
 ## Domínio
 
