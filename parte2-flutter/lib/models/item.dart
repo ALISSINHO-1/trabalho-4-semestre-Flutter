@@ -6,6 +6,7 @@ class Item {
   final String imagem;
   final String fabricante;
   final int anoLancamento;
+  final List<String> galeria; // <-- 1. NOVO: Adicione esta linha
 
   const Item({
     required this.nome,
@@ -15,8 +16,8 @@ class Item {
     required this.imagem,
     required this.fabricante,
     required this.anoLancamento,
+    this.galeria = const [], // <-- 2. NOVO: Adicione esta linha (por padrão, a galeria começa vazia)
   });
 
-  String get precoFormatado =>
-      'R\$ ${preco.toStringAsFixed(2).replaceAll('.', ',')}';
+
 }
