@@ -8,14 +8,13 @@ class ContaPage extends StatefulWidget {
 }
 
 class _ContaPageState extends State<ContaPage> {
-  bool isLogin = true; 
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
-      backgroundColor: const Color(0xFF01040A), 
-      extendBodyBehindAppBar: true, 
+      backgroundColor: const Color(0xFF01040A),
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -23,8 +22,6 @@ class _ContaPageState extends State<ContaPage> {
       ),
       body: Stack(
         children: [
-
-
           // --- EFEITOS NEON DE FUNDO ---
           Positioned(
             top: -50,
@@ -51,7 +48,6 @@ class _ContaPageState extends State<ContaPage> {
             ),
           ),
 
-
           // --- CONTEÚDO PRINCIPAL ---
           Center(
             child: SingleChildScrollView(
@@ -64,7 +60,8 @@ class _ContaPageState extends State<ContaPage> {
                   decoration: BoxDecoration(
                     color: const Color(0xFF080D1A).withValues(alpha: 0.85),
                     borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.3)),
+                    border: Border.all(
+                        color: Colors.blueAccent.withValues(alpha: 0.3)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.5),
@@ -77,26 +74,28 @@ class _ContaPageState extends State<ContaPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-
-
                       // --- ÍCONE E TÍTULO ---
-                      Icon(Icons.sports_esports, size: 60, color: Colors.blueAccent.shade400),
+                      Icon(Icons.sports_esports,
+                          size: 60, color: Colors.blueAccent.shade400),
                       const SizedBox(height: 16),
                       const Text(
                         'Play Retrô',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 32, 
-                          fontWeight: FontWeight.w900, 
+                          fontSize: 32,
+                          fontWeight: FontWeight.w900,
                           color: Colors.white,
                           letterSpacing: 1.5,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        isLogin ? 'Bem-vindo de volta, jogador!' : 'Crie sua conta e dê um Start!',
+                        isLogin
+                            ? 'Bem-vindo de volta, jogador!'
+                            : 'Crie sua conta e dê um Start!',
                         textAlign: TextAlign.center,
-                        style: const TextStyle(color: Colors.white54, fontSize: 14),
+                        style: const TextStyle(
+                            color: Colors.white54, fontSize: 14),
                       ),
                       const SizedBox(height: 32),
 
@@ -106,7 +105,8 @@ class _ContaPageState extends State<ContaPage> {
                         decoration: BoxDecoration(
                           color: const Color(0xFF030B17),
                           borderRadius: BorderRadius.circular(25),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                          border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.05)),
                         ),
                         child: Row(
                           children: [
@@ -116,14 +116,18 @@ class _ContaPageState extends State<ContaPage> {
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 300),
                                   decoration: BoxDecoration(
-                                    color: isLogin ? Colors.blueAccent.shade400 : Colors.transparent,
+                                    color: isLogin
+                                        ? Colors.blueAccent.shade400
+                                        : Colors.transparent,
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   alignment: Alignment.center,
                                   child: Text(
                                     'ENTRAR',
                                     style: TextStyle(
-                                      color: isLogin ? Colors.white : Colors.white54, 
+                                      color: isLogin
+                                          ? Colors.white
+                                          : Colors.white54,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -136,14 +140,18 @@ class _ContaPageState extends State<ContaPage> {
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 300),
                                   decoration: BoxDecoration(
-                                    color: !isLogin ? Colors.blueAccent.shade400 : Colors.transparent,
+                                    color: !isLogin
+                                        ? Colors.blueAccent.shade400
+                                        : Colors.transparent,
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   alignment: Alignment.center,
                                   child: Text(
                                     'CADASTRAR',
                                     style: TextStyle(
-                                      color: !isLogin ? Colors.white : Colors.white54, 
+                                      color: !isLogin
+                                          ? Colors.white
+                                          : Colors.white54,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -155,24 +163,30 @@ class _ContaPageState extends State<ContaPage> {
                       ),
                       const SizedBox(height: 32),
 
-
                       // --- CAMPOS DO FORMULÁRIO ---
                       AnimatedSize(
                         duration: const Duration(milliseconds: 300),
                         child: Column(
                           children: [
                             if (!isLogin) ...[
-                              _buildTextField(label: 'Nome de Usuário', icone: Icons.person_outline),
+                              _buildTextField(
+                                  label: 'Nome de Usuário',
+                                  icone: Icons.person_outline),
                               const SizedBox(height: 16),
                             ],
                           ],
                         ),
                       ),
-                      
-                      _buildTextField(label: 'E-mail', icone: Icons.email_outlined, keyboardType: TextInputType.emailAddress),
+
+                      _buildTextField(
+                          label: 'E-mail',
+                          icone: Icons.email_outlined,
+                          keyboardType: TextInputType.emailAddress),
                       const SizedBox(height: 16),
-                      _buildTextField(label: 'Senha', icone: Icons.lock_outline, isPassword: true),
-                      
+                      _buildTextField(
+                          label: 'Senha',
+                          icone: Icons.lock_outline,
+                          isPassword: true),
 
                       // Link "Esqueceu a senha?" (Apenas no login)
                       if (isLogin) ...[
@@ -180,7 +194,8 @@ class _ContaPageState extends State<ContaPage> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {},
-                            child: const Text('Esqueceu a senha?', style: TextStyle(color: Colors.white54)),
+                            child: const Text('Esqueceu a senha?',
+                                style: TextStyle(color: Colors.white54)),
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -188,13 +203,15 @@ class _ContaPageState extends State<ContaPage> {
                         const SizedBox(height: 32),
                       ],
 
-
                       // --- BOTÃO DE AÇÃO COM GRADIENTE E SOMBRA ---
                       Container(
                         height: 52,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [Colors.blueAccent.shade400, Colors.blueAccent.shade700],
+                            colors: [
+                              Colors.blueAccent.shade400,
+                              Colors.blueAccent.shade700
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -209,36 +226,51 @@ class _ContaPageState extends State<ContaPage> {
                         ),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent, 
+                            backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
                           ),
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(isLogin ? 'Login realizado com sucesso!' : 'Conta criada com sucesso!'),
+                                content: Text(isLogin
+                                    ? 'Login realizado com sucesso!'
+                                    : 'Conta criada com sucesso!'),
                                 backgroundColor: Colors.green,
                               ),
                             );
-                            Navigator.of(context).pop(); 
+                            Navigator.of(context).pop();
                           },
                           child: Text(
                             isLogin ? 'ACESSAR CONTA' : 'CRIAR CONTA',
-                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 1),
+                            style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                letterSpacing: 1),
                           ),
                         ),
                       ),
-                      
+
                       // --- LOGIN SOCIAL (Divisória e Botões falsos) ---
                       const SizedBox(height: 32),
                       const Row(
                         children: [
-                          Expanded(child: Divider(color: Colors.white10, thickness: 1)),
+                          Expanded(
+                              child:
+                                  Divider(color: Colors.white10, thickness: 1)),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('OU CONTINUAR COM', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+                            child: Text('OU CONTINUAR COM',
+                                style: TextStyle(
+                                    color: Colors.white38,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold)),
                           ),
-                          Expanded(child: Divider(color: Colors.white10, thickness: 1)),
+                          Expanded(
+                              child:
+                                  Divider(color: Colors.white10, thickness: 1)),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -261,7 +293,11 @@ class _ContaPageState extends State<ContaPage> {
     );
   }
 
-  Widget _buildTextField({required String label, required IconData icone, bool isPassword = false, TextInputType? keyboardType}) {
+  Widget _buildTextField(
+      {required String label,
+      required IconData icone,
+      bool isPassword = false,
+      TextInputType? keyboardType}) {
     return TextField(
       obscureText: isPassword,
       keyboardType: keyboardType,
@@ -271,13 +307,16 @@ class _ContaPageState extends State<ContaPage> {
         labelStyle: const TextStyle(color: Colors.white54),
         prefixIcon: Icon(icone, color: Colors.blueAccent.shade200),
         filled: true,
-        fillColor: const Color(0xFF030B17), 
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.blueAccent.shade400)),
+        fillColor: const Color(0xFF030B17),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.blueAccent.shade400)),
       ),
     );
   }
-
 
   // Widgezinho pra desenhar os botões sociais
   Widget _buildSocialButton(String texto, IconData icone) {
@@ -294,7 +333,9 @@ class _ContaPageState extends State<ContaPage> {
           children: [
             Icon(icone, color: Colors.white, size: 24),
             const SizedBox(width: 8),
-            Text(texto, style: const TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
+            Text(texto,
+                style: const TextStyle(
+                    color: Colors.white70, fontWeight: FontWeight.bold)),
           ],
         ),
       ),

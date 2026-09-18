@@ -10,7 +10,6 @@ class ItemCarrinho {
   double get subtotal => produto.preco * quantidade;
 }
 
-
 class Carrinho {
   static final Carrinho _instancia = Carrinho._interno();
   factory Carrinho() => _instancia;
