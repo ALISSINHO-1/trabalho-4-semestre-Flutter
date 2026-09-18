@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/home_page.dart';
 import 'screens/splash_page.dart';
 
 void main() {
- 
   runApp(const PlayRetroApp());
 }
 
@@ -17,7 +15,7 @@ class PlayRetroApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF090E17), 
+        scaffoldBackgroundColor: const Color(0xFF090E17),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF161B22),
           centerTitle: true,
@@ -27,9 +25,7 @@ class PlayRetroApp extends StatelessWidget {
           secondary: Colors.blueAccent.shade700,
         ),
       ),
-      
-      // Dizemos que a tela inicial agora é a SplashPage
-      home: const SplashPage(), 
+      home: const SplashPage(),
     );
   }
 }

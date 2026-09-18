@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math' as math; // Importação para animar a boca do Pac-Man!
-import 'home_page.dart';
+import 'login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -10,28 +10,30 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateMixin {
+class _SplashPageState extends State<SplashPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    // A animação dura 4 segundos no total
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(milliseconds: 1000),
     )..forward();
 
-    // Redireciona para a home depois de 4.5 segundos
-    Timer(const Duration(milliseconds: 4500), () {
+    _timer = Timer(const Duration(milliseconds: 1200), () {
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (_) => const LoginPage()),
       );
     });
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -48,7 +50,8 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
             right: -30,
             child: Transform.rotate(
               angle: -0.2,
-              child: Icon(Icons.gamepad, size: 250, color: Colors.blueAccent.withValues(alpha: 0.03)),
+              child: Icon(Icons.gamepad,
+                  size: 250, color: Colors.blueAccent.withValues(alpha: 0.03)),
             ),
           ),
           Positioned(
@@ -56,7 +59,8 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
             left: -40,
             child: Transform.rotate(
               angle: 0.4,
-              child: Icon(Icons.videogame_asset, size: 150, color: Colors.blueAccent.withValues(alpha: 0.03)),
+              child: Icon(Icons.videogame_asset,
+                  size: 150, color: Colors.blueAccent.withValues(alpha: 0.03)),
             ),
           ),
 
@@ -66,14 +70,25 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Spacer(flex: 3),
-                
+
                 const Text(
                   'Play',
-                  style: TextStyle(fontFamily: 'Courier', fontSize: 48, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: 2),
+                  style: TextStyle(
+                      fontFamily: 'Courier',
+                      fontSize: 48,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                      letterSpacing: 2),
                 ),
                 const Text(
                   'Retrô',
-                  style: TextStyle(fontFamily: 'Courier', fontSize: 52, fontWeight: FontWeight.w900, color: Colors.blueAccent, letterSpacing: 2, height: 0.9),
+                  style: TextStyle(
+                      fontFamily: 'Courier',
+                      fontSize: 52,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.blueAccent,
+                      letterSpacing: 2,
+                      height: 0.9),
                 ),
                 const SizedBox(height: 12),
                 Row(
@@ -88,24 +103,30 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                 const SizedBox(height: 32),
                 const Text(
                   'PASSADO  •  PRESENTE  •  SEMPRE PLAY',
-                  style: TextStyle(color: Colors.white70, fontSize: 11, letterSpacing: 2, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 11,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.bold),
                 ),
-                
+
                 const Spacer(flex: 2),
 
                 // --- NOVA BARRA DO PAC-MAN (PERFEITA) ---
                 _buildPacmanProgressBar(),
-                
+
                 const SizedBox(height: 24),
                 const Text(
                   'CARREGANDO GRANDES MEMÓRIAS...',
-                  style: TextStyle(color: Colors.white54, fontSize: 10, letterSpacing: 2),
+                  style: TextStyle(
+                      color: Colors.white54, fontSize: 10, letterSpacing: 2),
                 ),
-                
+
                 const Spacer(flex: 3),
                 const Text(
                   'JOGOS  •  FIGURAS  •  CARTAS',
-                  style: TextStyle(color: Colors.white38, fontSize: 10, letterSpacing: 4),
+                  style: TextStyle(
+                      color: Colors.white38, fontSize: 10, letterSpacing: 4),
                 ),
                 const SizedBox(height: 40),
               ],
@@ -124,7 +145,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   Widget _buildPacmanProgressBar() {
     const double barWidth = 280.0;
     const double pacmanSize = 24.0; // Tamanho do Pac-Man
-    
+
     return Container(
       width: barWidth,
       height: 34,
@@ -142,25 +163,26 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
-                12, 
-                (index) => const CircleAvatar(radius: 3, backgroundColor: Colors.white70)
-              ),
+                  12,
+                  (index) => const CircleAvatar(
+                      radius: 3, backgroundColor: Colors.white70)),
             ),
           ),
-          
+
           // 2. Animação real do Pac-Man
           AnimatedBuilder(
             animation: _controller,
             builder: (context, child) {
               double progress = _controller.value;
-              
+
               // Posição do Pac-man andando da esquerda para a direita
-              double pacmanPosition = progress * (barWidth - pacmanSize - 8); 
-              
+              double pacmanPosition = progress * (barWidth - pacmanSize - 8);
+
               // Fórmula matemática para fazer a boca abrir e fechar (onda senoide)
               // Multiplicamos por 40 para que ele faça várias mordidas ao longo do trajeto
-              double mouthAngle = (math.sin(progress * math.pi * 40).abs() * (math.pi / 3)); 
-              
+              double mouthAngle =
+                  (math.sin(progress * math.pi * 40).abs() * (math.pi / 3));
+
               return Stack(
                 children: [
                   // Rastro escuro que vai cobrindo as bolinhas (fingindo que ele comeu)
@@ -174,7 +196,8 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                   ),
                   // O nosso Pac-Man desenhado a mão no Canvas!
                   Positioned(
-                    left: pacmanPosition + 4, // O +4 é um espaçamento do cantinho
+                    left:
+                        pacmanPosition + 4, // O +4 é um espaçamento do cantinho
                     top: 3, // Centraliza a bolinha no eixo vertical da barra
                     child: CustomPaint(
                       size: const Size(pacmanSize, pacmanSize),
@@ -207,7 +230,7 @@ class PacmanPainter extends CustomPainter {
 
     // Criamos um quadrado do tamanho exato da nossa bolinha (24x24)
     final rect = Rect.fromLTWH(0, 0, size.width, size.height);
-    
+
     // Calcula onde a boca começa e quanto ela recorta do círculo
     final startAngle = mouthAngle / 2;
     final sweepAngle = (2 * math.pi) - mouthAngle;
@@ -218,6 +241,7 @@ class PacmanPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant PacmanPainter oldDelegate) {
-    return oldDelegate.mouthAngle != mouthAngle; // Atualiza a cada frame do "nhac nhac"
+    return oldDelegate.mouthAngle !=
+        mouthAngle; // Atualiza a cada frame do "nhac nhac"
   }
 }
