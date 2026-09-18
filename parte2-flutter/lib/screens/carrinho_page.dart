@@ -9,7 +9,7 @@ class CarrinhoPage extends StatefulWidget {
 }
 
 class _CarrinhoPageState extends State<CarrinhoPage> {
-  final Carrinho carrinho = Carrinho(); 
+  final Carrinho carrinho = Carrinho();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,8 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
       backgroundColor: const Color(0xFF030B17),
       appBar: AppBar(
         backgroundColor: const Color(0xFF030B17),
-        title: const Text('Meu Carrinho', style: TextStyle(color: Colors.white)),
+        title:
+            const Text('Meu Carrinho', style: TextStyle(color: Colors.white)),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: carrinho.itens.isEmpty
@@ -36,18 +37,32 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                       final itemCarrinho = carrinho.itens[index];
                       return Card(
                         color: const Color(0xFF0D1424),
-                        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
                         child: ListTile(
                           leading: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: itemCarrinho.produto.imagem.startsWith('http')
-                                ? Image.network(itemCarrinho.produto.imagem, width: 50, height: 50, fit: BoxFit.cover)
-                                : Image.asset(itemCarrinho.produto.imagem, width: 50, height: 50, fit: BoxFit.cover),
+                            child:
+                                itemCarrinho.produto.imagem.startsWith('http')
+                                    ? Image.network(itemCarrinho.produto.imagem,
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.cover)
+                                    : Image.asset(itemCarrinho.produto.imagem,
+                                        width: 50,
+                                        height: 50,
+                                        fit: BoxFit.cover),
                           ),
-                          title: Text(itemCarrinho.produto.nome, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                          subtitle: Text('Qtd: ${itemCarrinho.quantidade}  |  R\$ ${itemCarrinho.subtotal.toStringAsFixed(2)}', style: const TextStyle(color: Colors.white54)),
+                          title: Text(itemCarrinho.produto.nome,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                          subtitle: Text(
+                              'Qtd: ${itemCarrinho.quantidade}  |  R\$ ${itemCarrinho.subtotal.toStringAsFixed(2)}',
+                              style: const TextStyle(color: Colors.white54)),
                           trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.redAccent),
+                            icon: const Icon(Icons.delete,
+                                color: Colors.redAccent),
                             onPressed: () {
                               setState(() {
                                 carrinho.remover(itemCarrinho.produto);
@@ -59,25 +74,31 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                     },
                   ),
                 ),
-                
 
                 // --- RODAPÉ DE CHECKOUT ---
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     color: const Color(0xFF0D1424),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(24)),
+                    border:
+                        Border.all(color: Colors.white.withValues(alpha: 0.05)),
                   ),
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Total da Compra:', style: TextStyle(color: Colors.white70, fontSize: 16)),
+                          const Text('Total da Compra:',
+                              style: TextStyle(
+                                  color: Colors.white70, fontSize: 16)),
                           Text(
                             'R\$ ${carrinho.valorTotal.toStringAsFixed(2)}',
-                            style: TextStyle(color: Colors.blueAccent.shade400, fontSize: 24, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: Colors.blueAccent.shade400,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -88,17 +109,25 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueAccent.shade400,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
                           ),
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Compra finalizada com sucesso!'), backgroundColor: Colors.green),
+                              const SnackBar(
+                                  content:
+                                      Text('Compra finalizada com sucesso!'),
+                                  backgroundColor: Colors.green),
                             );
                             setState(() {
                               carrinho.itens.clear();
                             });
                           },
-                          child: const Text('Finalizar Compra', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                          child: const Text('Finalizar Compra',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
                         ),
                       ),
                     ],

@@ -3,8 +3,9 @@ import 'item.dart';
 class ItemEspecial extends Item {
   final String material;
   final String dimensoes;
+  final double desconto;
 
-  const ItemEspecial({
+  ItemEspecial({
     required super.nome,
     required super.preco,
     required super.categoria,
@@ -12,7 +13,12 @@ class ItemEspecial extends Item {
     required super.imagem,
     required super.fabricante,
     required super.anoLancamento,
+    super.galeria,
+    super.quantidade,
+    required super.cadastro,
+    super.ativo,
     required this.material,
     required this.dimensoes,
+    this.desconto = 0,
   });
 }

@@ -6,9 +6,14 @@ class Item {
   final String imagem;
   final String fabricante;
   final int anoLancamento;
-  final List<String> galeria; // <-- 1. NOVO: Adicione esta linha
+  final List<String> galeria;
 
-  const Item({
+  // Conceitos reaproveitados da Parte 1, mantidos com valores seguros para a UI.
+  final int quantidade;
+  final DateTime cadastro;
+  final bool ativo;
+
+  Item({
     required this.nome,
     required this.preco,
     required this.categoria,
@@ -16,8 +21,11 @@ class Item {
     required this.imagem,
     required this.fabricante,
     required this.anoLancamento,
-    this.galeria = const [], // <-- 2. NOVO: Adicione esta linha (por padrão, a galeria começa vazia)
+    this.galeria = const [],
+    this.quantidade = 1,
+    required this.cadastro,
+    this.ativo = true,
   });
 
-
+  String ficha() => '$nome, $quantidade un, R\$ ${preco.toStringAsFixed(2)}';
 }
