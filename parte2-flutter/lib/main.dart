@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
+import 'screens/splash_page.dart';
 
-import 'screens/home_page.dart';
+void main() {
+  runApp(const PlayRetroApp());
+}
 
-void main() => runApp(const AcervoPixelApp());
-
-class AcervoPixelApp extends StatelessWidget {
-  const AcervoPixelApp({super.key});
+class PlayRetroApp extends StatelessWidget {
+  const PlayRetroApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-      title: 'Acervo Pixel',
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Retrô Games',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-          useMaterial3: true),
-      home: const HomePage());
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF090E17),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF161B22),
+          centerTitle: true,
+        ),
+        colorScheme: ColorScheme.dark(
+          primary: Colors.blueAccent,
+          secondary: Colors.blueAccent.shade700,
+        ),
+      ),
+      home: const SplashPage(),
+    );
+  }
 }
