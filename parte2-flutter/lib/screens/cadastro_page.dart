@@ -16,6 +16,7 @@ class _CadastroPageState extends State<CadastroPage> {
   final nomeController = TextEditingController();
   final precoController = TextEditingController();
   final descricaoController = TextEditingController();
+  String? categoriaSelecionada;
 
   @override
   void dispose() {
@@ -28,8 +29,19 @@ class _CadastroPageState extends State<CadastroPage> {
   void _salvar() {
     final nome = nomeController.text.trim();
     final descricao = descricaoController.text.trim();
+    final categoria = categoriaSelecionada;
     final valor =
         double.tryParse(precoController.text.trim().replaceAll(',', '.'));
+
+    if (categoria == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Selecione uma categoria.'),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+      return;
+    }
 
     if (nome.isEmpty || valor == null || valor < 0) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -45,7 +57,7 @@ class _CadastroPageState extends State<CadastroPage> {
       Item(
         nome: nome,
         preco: valor,
-        categoria: 'Novo item',
+        categoria: categoria,
         descricao:
             descricao.isEmpty ? 'Item cadastrado no catálogo.' : descricao,
         imagem: '',
@@ -92,6 +104,32 @@ class _CadastroPageState extends State<CadastroPage> {
                     ? 'Informe um preço válido'
                     : null;
               },
+            ),
+            const SizedBox(height: 16),
+            DropdownButtonFormField<String>(
+              value: categoriaSelecionada,
+              isExpanded: true,
+              dropdownColor: const Color(0xFF0D1424),
+              style: const TextStyle(color: Colors.white),
+              decoration: _decoration('Categoria'),
+              hint: const Text(
+                'Selecione uma categoria',
+                style: TextStyle(color: Colors.white54),
+              ),
+              icon: const Icon(Icons.arrow_drop_down, color: Colors.white70),
+              items: categoriasDisponiveis
+                  .map(
+                    (categoria) => DropdownMenuItem<String>(
+                      value: categoria,
+                      child: Text(categoria),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (categoria) {
+                setState(() => categoriaSelecionada = categoria);
+              },
+              validator: (categoria) =>
+                  categoria == null ? 'Selecione uma categoria.' : null,
             ),
             const SizedBox(height: 16),
             TextFormField(

@@ -1,11 +1,3 @@
-const categoriasDisponiveis = <String>[
-  'Consoles',
-  'Jogos',
-  'Action Figures',
-  'Cartas',
-  'Colecionáveis',
-];
-
 class Item {
   final String nome;
   final double preco;
@@ -16,11 +8,6 @@ class Item {
   final int anoLancamento;
   final List<String> galeria;
 
-  // Conceitos reaproveitados da Parte 1, mantidos com valores seguros para a UI.
-  final int quantidade;
-  final DateTime cadastro;
-  final bool ativo;
-
   Item({
     required this.nome,
     required this.preco,
@@ -30,10 +17,7 @@ class Item {
     required this.fabricante,
     required this.anoLancamento,
     this.galeria = const [],
-    this.quantidade = 1,
-    required this.cadastro,
-    this.ativo = true,
   });
 
-  String ficha() => '$nome, $quantidade un, R\$ ${preco.toStringAsFixed(2)}';
+  String ficha() => '$nome, R\$ ${preco.toStringAsFixed(2)}';
 }

@@ -4,6 +4,7 @@ import '../models/carrinho.dart';
 import '../models/favoritos.dart';
 import '../models/item.dart';
 import '../models/item_especial.dart';
+import 'widgets/imagem_produto.dart';
 
 class DetalhePage extends StatefulWidget {
   final Item item;
@@ -149,14 +150,11 @@ class _DetalhePageState extends State<DetalhePage> {
   }
 
   Widget _renderImage(String path, BoxFit fit) {
-    if (path.startsWith('assets/')) {
-      return Image.asset(
-        path,
-        fit: fit,
-        errorBuilder: (_, __, ___) => _fallbackImage(),
-      );
-    }
-    return _fallbackImage();
+    return ImagemProduto(
+      fonte: path,
+      categoria: widget.item.categoria,
+      fit: fit,
+    );
   }
 
   Widget _buildProductDetails(bool isEspecial, ItemEspecial? especial) {
@@ -321,13 +319,6 @@ class _DetalhePageState extends State<DetalhePage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _fallbackImage() {
-    return const Center(
-      child:
-          Icon(Icons.image_not_supported, color: Colors.blueAccent, size: 50),
     );
   }
 }
