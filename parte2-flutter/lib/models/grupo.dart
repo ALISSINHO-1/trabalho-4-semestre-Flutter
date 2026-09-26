@@ -40,7 +40,7 @@ class Grupo {
           categoria: 'Consoles',
           descricao:
               'Um dos consoles mais populares da sexta geração, lançado no ano 2000.',
-          imagem: '',
+          imagem: 'https://m.media-amazon.com/images/I/319vp+K2hxL.jpg',
           fabricante: 'Sony Computer Entertainment',
           anoLancamento: 2000,
           cadastro: DateTime(2026, 1, 2),
@@ -51,7 +51,8 @@ class Grupo {
           categoria: 'Action Figures',
           descricao:
               'Action figure articulado do herói em pose dinâmica, com acabamento detalhado.',
-          imagem: '',
+          imagem:
+              'https://ironstudios.com.br/cdn/shop/files/6898437.jpg?v=1767632757&width=1024',
           fabricante: 'Iron Studios',
           anoLancamento: 2023,
           material: 'Polystone',
@@ -65,7 +66,8 @@ class Grupo {
           categoria: 'Action Figures',
           descricao:
               'Peça de coleção com pose imponente, capa marcante e pintura manual.',
-          imagem: '',
+          imagem:
+              'https://ironstudios.com.br/cdn/shop/files/7130123.jpg?v=1779118691&width=1024',
           fabricante: 'Iron Studios',
           anoLancamento: 2023,
           cadastro: DateTime(2026, 1, 4),
@@ -76,7 +78,8 @@ class Grupo {
           categoria: 'Cartas',
           descricao:
               'Caixa premium para jogadores e colecionadores que desejam expandir seus decks.',
-          imagem: '',
+          imagem:
+              'https://imgs.search.brave.com/ki8qRlsHOq-1vD0vrx82MyjRVGRp6-mtQ-f9Vwq-tyY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9rYW50b2NhcmRzLmNvbS9jZG4vc2hvcC9maWxlcy9wb2tlbW9uX3RjZ19tZWdhX2V2b2x1dGlvbl9lbGl0ZV90cmFpbmVyX2JveF9tZWdhX2x1Y2FyaW8taGlnaF9iY2U4YzUwZi1iZDBjLTQ1OTYtOTc4ZS04Yjk2MWJkNTAyOGIucG5nP3Y9MTc1NjQyMjkzOSZ3aWR0aD01NTA',
           fabricante: 'The Pokémon Company',
           anoLancamento: 2025,
           cadastro: DateTime(2026, 1, 5),
@@ -87,7 +90,8 @@ class Grupo {
           categoria: 'Cartas',
           descricao:
               'Produto de cartas colecionáveis para montar estratégias e ampliar a coleção.',
-          imagem: '',
+          imagem:
+              'https://helios-i.mashable.com/imagery/articles/033QMfTAL5RKG5Wz3beA6pC/hero-image.fill.size_1200x675.v1755599698.jpg',
           fabricante: 'The Pokémon Company',
           anoLancamento: 2025,
           cadastro: DateTime(2026, 1, 6),

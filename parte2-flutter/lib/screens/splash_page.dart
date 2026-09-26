@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'dart:math' as math; // Importação para animar a boca do Pac-Man!
 import 'login_page.dart';
 
@@ -12,28 +11,33 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  Timer? _timer;
+  late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    )..forward();
+      duration: const Duration(seconds: 10),
+    );
+    _startSplashAnimation();
+  }
 
-    _timer = Timer(const Duration(milliseconds: 1200), () {
-      if (!mounted) return;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const LoginPage()),
-      );
-    });
+  Future<void> _startSplashAnimation() async {
+    try {
+      await _controller.forward();
+    } on TickerCanceled {
+      return;
+    }
+
+    if (!mounted) return;
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const LoginPage()),
+    );
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -143,73 +147,91 @@ class _SplashPageState extends State<SplashPage>
 
   // NOVA BARRA COM DESENHO CUSTOMIZADO
   Widget _buildPacmanProgressBar() {
-    const double barWidth = 280.0;
+    const double maxBarWidth = 280.0;
     const double pacmanSize = 24.0; // Tamanho do Pac-Man
 
-    return Container(
-      width: barWidth,
-      height: 34,
-      decoration: BoxDecoration(
-        color: const Color(0xFF030B17), // Cor de fundo do trilho
-        border: Border.all(color: Colors.blueAccent.shade700, width: 2),
-        borderRadius: BorderRadius.circular(17),
-      ),
-      child: Stack(
-        alignment: Alignment.centerLeft,
-        children: [
-          // 1. Pastilhas (bolinhas brancas) distribuídas igualmente
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                  12,
-                  (index) => const CircleAvatar(
-                      radius: 3, backgroundColor: Colors.white70)),
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final barWidth = math.min(maxBarWidth, constraints.maxWidth);
+
+        return Container(
+          width: barWidth,
+          height: 34,
+          decoration: BoxDecoration(
+            color: const Color(0xFF030B17), // Cor de fundo do trilho
+            border: Border.all(color: Colors.blueAccent.shade700, width: 2),
+            borderRadius: BorderRadius.circular(17),
           ),
-
-          // 2. Animação real do Pac-Man
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              double progress = _controller.value;
-
-              // Posição do Pac-man andando da esquerda para a direita
-              double pacmanPosition = progress * (barWidth - pacmanSize - 8);
-
-              // Fórmula matemática para fazer a boca abrir e fechar (onda senoide)
-              // Multiplicamos por 40 para que ele faça várias mordidas ao longo do trajeto
-              double mouthAngle =
-                  (math.sin(progress * math.pi * 40).abs() * (math.pi / 3));
+          child: LayoutBuilder(
+            builder: (context, trackConstraints) {
+              final travelDistance = math.max(
+                0.0,
+                trackConstraints.maxWidth - pacmanSize - 8,
+              );
 
               return Stack(
+                alignment: Alignment.centerLeft,
                 children: [
-                  // Rastro escuro que vai cobrindo as bolinhas (fingindo que ele comeu)
-                  Container(
-                    width: pacmanPosition + (pacmanSize / 2) + 4,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF030B17), // Mesma cor do fundo
-                      borderRadius: BorderRadius.circular(15),
+                  // 1. Pastilhas (bolinhas brancas) distribuídas igualmente
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                          12,
+                          (index) => const CircleAvatar(
+                              radius: 3, backgroundColor: Colors.white70)),
                     ),
                   ),
-                  // O nosso Pac-Man desenhado a mão no Canvas!
-                  Positioned(
-                    left:
-                        pacmanPosition + 4, // O +4 é um espaçamento do cantinho
-                    top: 3, // Centraliza a bolinha no eixo vertical da barra
-                    child: CustomPaint(
-                      size: const Size(pacmanSize, pacmanSize),
-                      painter: PacmanPainter(mouthAngle: mouthAngle),
-                    ),
+
+                  // 2. Animação real do Pac-Man
+                  AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      double progress = _controller.value;
+
+                      // Posição do Pac-man andando da esquerda para a direita
+                      double pacmanPosition = progress * travelDistance;
+
+                      // Fórmula matemática para fazer a boca abrir e fechar (onda senoide)
+                      // Multiplicamos por 40 para que ele faça várias mordidas ao longo do trajeto
+                      double mouthAngle =
+                          (math.sin(progress * math.pi * 40).abs() *
+                              (math.pi / 3));
+
+                      return Stack(
+                        children: [
+                          // Rastro escuro que vai cobrindo as bolinhas (fingindo que ele comeu)
+                          Container(
+                            width: pacmanPosition + (pacmanSize / 2) + 4,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color:
+                                  const Color(0xFF030B17), // Mesma cor do fundo
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          // O nosso Pac-Man desenhado a mão no Canvas!
+                          Positioned(
+                            left: pacmanPosition +
+                                4, // O +4 é um espaçamento do cantinho
+                            top:
+                                3, // Centraliza a bolinha no eixo vertical da barra
+                            child: CustomPaint(
+                              size: const Size(pacmanSize, pacmanSize),
+                              painter: PacmanPainter(mouthAngle: mouthAngle),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               );
             },
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -17,7 +17,7 @@ imagem, fabricante e ano de lançamento.
 
 ### Entidade especializada/herança
 
-`ItemEspecial` herda de `Item` e acrescenta material, dimensões e desconto.
+`ItemEspecial` herda de `Item` e acrescenta material e dimensões.
 
 ### Classe agrupadora/composição
 
@@ -26,11 +26,11 @@ composição: o catálogo é formado pelos itens que pertencem ao grupo.
 
 ## Parte 1 — Dart
 
-Os models da Parte 1 estão em `parte1-dart/bin/models/`. Eles demonstram
-entidade, herança, composição e encapsulamento. A Parte 2 preserva os atributos
-de produto necessários à interface e mantém `quantidade`, `cadastro`, `ativo` e
-`ficha()` para compatibilidade com os conceitos da Parte 1; `quantidade` também
-participa do cálculo do total.
+Os models reutilizáveis da Parte 1 estão em `parte1-dart/lib/models/`, e o
+executável demonstrativo está em `parte1-dart/bin/parte1_dart.dart`. Eles
+demonstram entidade, herança, composição e encapsulamento no mesmo domínio da
+loja. `Item` representa um produto do catálogo; quantidade pertence à relação
+entre produto e carrinho na Parte 2, não ao produto em si.
 
 ## Parte 2 — Flutter
 
@@ -50,10 +50,10 @@ Studios em `Grupo.catalogoInicial()`.
 
 | # | Exercício | Arquivo e linha real | Evidência |
 |---|---|---|---|
-| 1 | Entidade principal | `parte1-dart/bin/models/item.dart:1` | Classe `Item` |
-| 2 | Herança | `parte1-dart/bin/models/item_especial.dart:3` | `ItemEspecial extends Item` |
-| 3 | Composição | `parte1-dart/bin/models/grupo.dart:5, 10` | Grupo contém itens |
-| 4 | Encapsulamento | `parte1-dart/bin/models/grupo.dart:5, 12, 18` | `_itens`, getter e total |
+| 1 | Entidade principal | `parte1-dart/lib/models/item.dart:1` + `parte1-dart/bin/parte1_dart.dart:5` | Classe `Item` |
+| 2 | Herança | `parte1-dart/lib/models/item_especial.dart:3` + `parte1-dart/bin/parte1_dart.dart:35` | `ItemEspecial extends Item` |
+| 3 | Composição | `parte1-dart/lib/models/grupo.dart:3` + `parte1-dart/bin/parte1_dart.dart:59` | Grupo contém itens |
+| 4 | Encapsulamento | `parte1-dart/lib/models/grupo.dart:5, 9, 13` + `parte1-dart/bin/parte1_dart.dart:75` | `_itens`, getter e total |
 | 5 | Estrutura de tela | `parte2-flutter/lib/screens/home_page.dart:41, 44, 123, 124, 125, 248` | Scaffold, AppBar, Column e total |
 | 6 | Cartão | `parte2-flutter/lib/screens/widgets/cartao.dart:12, 17, 22` | Container, BoxDecoration, borda e sombra |
 | 7 | Lista dinâmica | `parte2-flutter/lib/screens/home_page.dart:298, 299, 300` | `ListView.builder` horizontal alimentado pelo Grupo |
@@ -65,10 +65,10 @@ Studios em `Grupo.catalogoInicial()`.
 
 | # | Evidência atual | Arquivo e linha real |
 |---|---|---|
-| 1 | Entidade principal | `parte1-dart/bin/models/item.dart:1` |
-| 2 | Herança | `parte1-dart/bin/models/item_especial.dart:3` |
-| 3 | Composição | `parte1-dart/bin/models/grupo.dart:3, 5, 12` |
-| 4 | Encapsulamento e total | `parte1-dart/bin/models/grupo.dart:5, 12, 18` |
+| 1 | Entidade principal | `parte1-dart/lib/models/item.dart:1` + `parte1-dart/bin/parte1_dart.dart:5` |
+| 2 | Herança | `parte1-dart/lib/models/item_especial.dart:3` + `parte1-dart/bin/parte1_dart.dart:35` |
+| 3 | Composição | `parte1-dart/lib/models/grupo.dart:3` + `parte1-dart/bin/parte1_dart.dart:59` |
+| 4 | Encapsulamento e total | `parte1-dart/lib/models/grupo.dart:5, 9, 13` + `parte1-dart/bin/parte1_dart.dart:75` |
 | 5 | Scaffold/AppBar/Column e getter de total | `parte2-flutter/lib/screens/home_page.dart:14, 44, 47, 126, 127, 257` |
 | 6 | Container, BoxDecoration, borda e sombra do card | `parte2-flutter/lib/screens/widgets/cartao.dart:26, 28, 31` |
 | 7 | ListView.builder principal | `parte2-flutter/lib/screens/home_page.dart:307` |
