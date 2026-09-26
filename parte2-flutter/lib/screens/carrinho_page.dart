@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/carrinho.dart';
+import 'widgets/imagem_produto.dart';
 
 class CarrinhoPage extends StatefulWidget {
   const CarrinhoPage({super.key});
@@ -42,16 +43,15 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                         child: ListTile(
                           leading: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child:
-                                itemCarrinho.produto.imagem.startsWith('http')
-                                    ? Image.network(itemCarrinho.produto.imagem,
-                                        width: 50,
-                                        height: 50,
-                                        fit: BoxFit.cover)
-                                    : Image.asset(itemCarrinho.produto.imagem,
-                                        width: 50,
-                                        height: 50,
-                                        fit: BoxFit.cover),
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: ImagemProduto(
+                                fonte: itemCarrinho.produto.imagem,
+                                categoria: itemCarrinho.produto.categoria,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                           title: Text(itemCarrinho.produto.nome,
                               style: const TextStyle(

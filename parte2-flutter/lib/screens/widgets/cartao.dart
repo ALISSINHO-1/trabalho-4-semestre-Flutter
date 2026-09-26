@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/item.dart';
+import 'imagem_produto.dart';
 
 class CartaoRetro extends StatelessWidget {
   final Item item;
@@ -147,24 +148,10 @@ class CartaoRetro extends StatelessWidget {
   }
 
   Widget _renderImage() {
-    if (item.imagem.startsWith('assets/')) {
-      return Image.asset(
-        item.imagem,
-        fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => _fallbackImage(),
-      );
-    }
-    return _fallbackImage();
-  }
-
-  Widget _fallbackImage() {
-    final icon = item.categoria == 'Cartas'
-        ? Icons.catching_pokemon
-        : item.categoria == 'Action Figures'
-            ? Icons.accessibility_new
-            : Icons.gamepad;
-    return Center(
-      child: Icon(icon, color: Colors.blueAccent.shade400, size: 56),
+    return ImagemProduto(
+      fonte: item.imagem,
+      categoria: item.categoria,
+      fit: BoxFit.contain,
     );
   }
 }
